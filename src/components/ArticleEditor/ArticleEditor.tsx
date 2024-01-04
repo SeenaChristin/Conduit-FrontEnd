@@ -39,6 +39,7 @@ export function ArticleEditor({ onSubmit }: { onSubmit: (ev: React.FormEvent) =>
                 fieldType: 'list',
                 lg: false,
               }),
+              buildGenericFormField({ name: 'coverImage', placeholder: 'Enter Img Url', lg: false }),
             ]}
           />
         </div>

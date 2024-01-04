@@ -90,8 +90,10 @@ async function onLoad(slug: string) {
 }
 
 function ArticlePageBanner(props: { article: Article; metaSection: MetaSectionState; user: Option<User> }) {
+  const article = props.article;
+
   return (
-    <div className='banner'>
+    <div className='banner' style={{ backgroundImage: `url(${article.coverImage})`, backgroundColor: 'white' }}>
       <div className='container'>
         <h1>{props.article.title}</h1>
 

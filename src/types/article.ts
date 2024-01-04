@@ -12,6 +12,7 @@ export interface Article {
   favorited: boolean;
   favoritesCount: number;
   author: Profile;
+  coverImage: string;
 }
 
 export const articleDecoder: Decoder<Article> = object({
@@ -25,6 +26,7 @@ export const articleDecoder: Decoder<Article> = object({
   favorited: boolean,
   favoritesCount: number,
   author: profileDecoder,
+  coverImage: string,
 });
 
 export interface MultipleArticles {
@@ -42,6 +44,7 @@ export interface ArticleForEditor {
   description: string;
   body: string;
   tagList: string[];
+  coverImage: string;
 }
 
 export interface ArticlesFilters {

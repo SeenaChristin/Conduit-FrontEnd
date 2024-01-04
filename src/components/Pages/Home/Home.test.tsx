@@ -289,6 +289,17 @@ it('Should change tabs', async () => {
   });
 
   await act(async () => {
+    fireEvent.click(screen.getByText('Top-10 Feed'));
+  });
+
+  expect(store.getState().home.selectedTab).toMatch('Top-10 Feed');
+
+  mockedGetFeed.mockResolvedValueOnce({
+    articles: [{ ...defaultArticle, favorited: true }],
+    articlesCount: 0,
+  });
+
+  await act(async () => {
     fireEvent.click(screen.getByText('Your Feed'));
   });
 

@@ -12,7 +12,7 @@ export interface EditorState {
 }
 
 const initialState: EditorState = {
-  article: { title: '', body: '', tagList: [], description: '' },
+  article: { title: '', body: '', tagList: [], description: '', coverImage: '' },
   tag: '',
   submitting: false,
   errors: {},

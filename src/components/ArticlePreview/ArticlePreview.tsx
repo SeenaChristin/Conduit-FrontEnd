@@ -12,6 +12,7 @@ export function ArticlePreview({
     description,
     tagList,
     author: { image, username },
+    coverImage,
   },
   isSubmitting,
   onFavoriteToggle,

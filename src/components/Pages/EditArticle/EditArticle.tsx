@@ -20,14 +20,14 @@ export function EditArticle() {
 async function _loadArticle(slug: string) {
   store.dispatch(initializeEditor());
   try {
-    const { title, description, body, tagList, author } = await getArticle(slug);
+    const { title, description, body, tagList, author, coverImage } = await getArticle(slug);
 
     if (author.username !== store.getState().app.user.unwrap().username) {
       location.hash = '#/';
       return;
     }
 
-    store.dispatch(loadArticle({ title, description, body, tagList }));
+    store.dispatch(loadArticle({ title, description, body, tagList, coverImage }));
   } catch {
     location.hash = '#/';
   }

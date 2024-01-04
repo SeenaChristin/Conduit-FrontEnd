@@ -62,7 +62,7 @@ function renderBanner() {
 function buildTabsNames(selectedTab: string) {
   const { user } = store.getState().app;
 
-  return Array.from(new Set([...(user.isSome() ? ['Your Feed'] : []), 'Global Feed', selectedTab]));
+  return Array.from(new Set([...(user.isSome() ? ['Your Feed'] : []), 'Global Feed', 'Top-10 Feed', selectedTab]));
 }
 
 async function onPageChange(index: number) {
@@ -75,8 +75,15 @@ async function onPageChange(index: number) {
 async function onTabChange(tab: string) {
   store.dispatch(changeTab(tab));
   store.dispatch(startLoadingArticles());
+  const { selectedTab } = store.getState().home;
 
   const multipleArticles = await getFeedOrGlobalArticles();
+  if (selectedTab === 'Top-10 Feed') {
+    multipleArticles.articles.sort((a, b) => b.favoritesCount - a.favoritesCount);
+    multipleArticles.articles = multipleArticles.articles.slice(0, 10);
+    multipleArticles.articlesCount = 10;
+  }
+
   store.dispatch(loadArticles(multipleArticles));
 }
 
@@ -86,7 +93,6 @@ async function getFeedOrGlobalArticles(filters: FeedFilters = {}) {
     ...filters,
     tag: selectedTab.slice(2),
   };
-
   return await (selectedTab === 'Your Feed' ? getFeed : getArticles)(
     !selectedTab.startsWith('#') ? filters : finalFilters
   );
